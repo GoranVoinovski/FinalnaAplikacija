@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.mkdingo.goran.finalnaaplikacija.Main2Activity">
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/logo"
+        android:hint="Logo of the Restaurant"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <EditText
+        android:id="@+id/city"
+        android:hint="Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:id="@+id/name"
+        android:hint="Name of Restaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RatingBar
+        android:id="@+id/rating"
+        android:hint="rating of the Restaurant"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/saverestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="save"/>
+
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mkdingo.goran.finalnaaplikacija.Main3Activity">
+
+    <TextView
+        android:id="@+id/imerestoran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:id="@+id/slikarestoran"
+        android:layout_below="@+id/imerestoran"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_below="@+id/slikarestoran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RatingBar
+        android:id="@+id/rejtingrestoran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location"
+        android:isIndicator="true"
+        android:stepSize="0.1"
+        style="?android:attr/ratingBarStyleSmall"
+        android:numStars="5"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvmenu"
+        android:layout_below="@+id/rejtingrestoran"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
