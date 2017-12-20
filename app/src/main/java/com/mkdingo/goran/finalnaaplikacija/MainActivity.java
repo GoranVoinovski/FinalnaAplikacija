@@ -1,7 +1,9 @@
 package com.mkdingo.goran.finalnaaplikacija;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,15 +44,34 @@ public class MainActivity extends AppCompatActivity {
             onRestoranClick(Restorani restoran, int position) {
                 Intent intent = new Intent(MainActivity.this, Main3Activity.class);
                 intent.putExtra("Restoran",restoran);
+                intent.putExtra("pozicija",position);
                 startActivity(intent);
             }
 
             @Override
-            public void onRestoranLongClick(Restorani restoran, int position) {
-                model.restaurants.remove(position);
-                RestoranPreferences.addRestoran(model,MainActivity.this);
-                adapter.setItems(generateList());
-                adapter.notifyDataSetChanged();
+            public void onRestoranLongClick(Restorani restoran, final int position) {
+
+                final AlertDialog.Builder myBuilder = new AlertDialog.Builder(MainActivity.this);
+                myBuilder.setTitle("Remove restaurant");
+                myBuilder.setMessage("Are you sure you want this restaurant to be removed?");
+                myBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        model.restaurants.remove(position);
+                        RestoranPreferences.addRestoran(model,MainActivity.this);
+                        adapter.setItems(generateList());
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                myBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       dialog.dismiss();
+                    }
+                });
+
+                myBuilder.create().show();
+
             }
         });
 

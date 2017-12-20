@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.google.gson.Gson;
 import com.mkdingo.goran.finalnaaplikacija.Adapter.SlikiAdapter;
@@ -16,12 +17,16 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Main4Activity extends AppCompatActivity {
 
     @BindView(R.id.pager)
     ViewPager mojPager;
+    @BindView(R.id.vnesihrana)
+    Button menu;
     Restorani meni;
+    Menu meninovo;
     SlikiAdapter adapter;
 
     @Override
@@ -40,6 +45,11 @@ public class Main4Activity extends AppCompatActivity {
         mojPager.setAdapter(adapter);
         mojPager.setCurrentItem(position);
 
+
+
     }
+
+
+
 
 }

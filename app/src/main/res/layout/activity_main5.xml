@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.mkdingo.goran.finalnaaplikacija.Main2Activity">
+    tools:context="com.mkdingo.goran.finalnaaplikacija.Main5Activity">
 
     <FrameLayout
+        android:id="@+id/fm1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -21,16 +21,19 @@
             android:background="@mipmap/addlogo"/>
 
 
-    <ImageView
-        android:layout_marginTop="20dp"
-        android:id="@+id/logo"
-        android:hint="Logo of the Restaurant"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:id="@+id/articleimg"
+            android:hint="Logo of the Restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
     </FrameLayout>
+
+
     <EditText
         android:id="@+id/name"
-        android:hint="Name of Restaurant"
+        android:layout_below="@id/fm1"
+        android:hint="Name of the article"
         android:paddingLeft="5dp"
         android:layout_marginLeft="5dp"
         android:inputType="textCapSentences"
@@ -41,8 +44,9 @@
         android:layout_height="50dp" />
 
     <EditText
-        android:id="@+id/city"
-        android:hint="Location"
+        android:id="@+id/price"
+        android:hint="Price of the article"
+        android:layout_below="@id/name"
         android:paddingLeft="5dp"
         android:inputType="textCapSentences"
         android:layout_marginLeft="5dp"
@@ -53,35 +57,34 @@
         android:layout_height="50dp" />
 
 
-    <RatingBar
-        android:layout_marginTop="10dp"
-        android:id="@+id/rating"
-        android:hint="rating of the Restaurant"
-        android:numStars="5"
-        android:stepSize="0.1"
-        android:layout_gravity="center"
+    <RadioButton
+        android:layout_below="@id/price"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:text="Vegetarian"
+        android:id="@+id/vegan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-
-    <TextView
-        android:id="@+id/ratingnum"
-        style="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textColor="@color/light_blue_700"
-        android:gravity="center"
-        android:layout_width="match_parent"
+    <RadioButton
+        android:layout_toRightOf="@id/vegan"
+        android:layout_below="@id/price"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/notvegan"
+        android:text="Non-Vegetarian"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:background="@color/colorPrimary"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:id="@+id/btnaddmenu"
+        android:layout_below="@id/vegan"
+        android:layout_marginTop="30dp"
+        android:text="add menu"
         android:textColor="@color/white"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="10dp"
-        android:id="@+id/saverestaurant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="save"/>
+        android:background="@color/colorPrimary"/>
 
-</LinearLayout>
+
+</RelativeLayout>

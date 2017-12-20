@@ -1,5 +1,6 @@
 package com.mkdingo.goran.finalnaaplikacija;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -67,12 +68,13 @@ public class Main2Activity extends AppCompatActivity {
             startActivityForResult(i, 1111);
         }
     });
-
-
     }
 
     @OnClick(R.id.saverestaurant)
     public void Save (){
+        if (slika.isEmpty()){
+           slika = "https://i.pinimg.com/736x/b5/5a/e8/b55ae88f3043f90addb5ef028e644325--restaurant-logo.jpg";
+        }else {}
         restoran = new Restorani(slika,edtcity.getText().toString(),edtname.getText().toString(),rejting,meni);
         restorani.restaurants.add(restoran);
         RestoranPreferences.addRestoran(restorani,Main2Activity.this);
