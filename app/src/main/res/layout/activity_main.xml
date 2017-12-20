@@ -18,8 +18,10 @@
    <Button
        android:id="@+id/addbtn"
        android:background="@mipmap/addbtn"
-       android:layout_width="70dp"
-       android:layout_height="70dp"
+       android:layout_width="60dp"
+       android:layout_height="60dp"
+       android:layout_marginRight="5dp"
+       android:layout_marginBottom="25dp"
        android:layout_alignParentBottom="true"
        android:layout_alignParentRight="true"/>
 

@@ -38,7 +38,7 @@ public class Main3Activity extends AppCompatActivity {
           restoranodbran = (Restorani) intent.getSerializableExtra("Restoran");
           imenakliknatrestoran.setText(restoranodbran.getName());
           Picasso.with(this).load(restoranodbran.getLogo()).centerInside().fit().into(slikanakliknatrestoran);
-          lokacijanakliknatrestoran.setText(restoranodbran.getCity());
+          lokacijanakliknatrestoran.setText("Location: " + restoranodbran.getCity());
           float rejting = Float.parseFloat(restoranodbran.getRating());
           rejtingnakliknatrestoran.setRating(rejting);
             adapter = new RVMeniAdapter(this, new OnImageClickListener() {

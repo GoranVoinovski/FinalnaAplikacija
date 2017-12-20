@@ -12,12 +12,15 @@
 
     <ImageView
         android:id="@+id/imgrestaurants"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_marginTop="2dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
 
     <TextView
         android:id="@+id/imerestoran"
-        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/black"
+        android:layout_centerVertical="true"
         style="@style/Base.TextAppearance.AppCompat.Medium"
         android:layout_toRightOf="@+id/imgrestaurants"
         android:layout_width="match_parent"
@@ -25,10 +28,12 @@
 
     <TextView
         android:id="@+id/rejting"
-        android:layout_marginTop="20dp"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@mipmap/ratingrestoranlayout"
         android:layout_below="@+id/imerestoran"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:gravity="center"
+        android:layout_width="70dp"
+        android:layout_height="20dp" />
 
 </RelativeLayout>

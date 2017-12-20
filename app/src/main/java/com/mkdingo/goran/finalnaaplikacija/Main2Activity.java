@@ -9,9 +9,11 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
@@ -26,7 +28,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Main2Activity extends AppCompatActivity {
-
+    @BindView(R.id.opengallery)Button gallery;
+    @BindView(R.id.ratingnum)TextView brojrejting;
     @BindView(R.id.logo)ImageView edtlogo;
     @BindView(R.id.city)EditText edtcity;
     @BindView(R.id.name)EditText edtname;
@@ -51,12 +54,13 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                ratingBar.setRating(rating);
+               brojrejting.setText(rating + "");
                rejting = String.valueOf(rating);
             }
         });
 
 
-    edtlogo.setOnClickListener(new View.OnClickListener() {
+    gallery.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

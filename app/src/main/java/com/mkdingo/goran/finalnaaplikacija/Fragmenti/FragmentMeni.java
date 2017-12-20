@@ -24,6 +24,7 @@ import butterknife.Unbinder;
 public class FragmentMeni extends Fragment {
 
     @BindView(R.id.slika)ImageView pic;
+    @BindView(R.id.vegan)ImageView veganska;
     @BindView(R.id.namefood)TextView franame;
     @BindView(R.id.nameprice)TextView fracena;
     private Unbinder mUnbind;
@@ -42,8 +43,12 @@ public class FragmentMeni extends Fragment {
         link =  getArguments().getString("link");
 
         Picasso.with(getActivity()).load(link).centerInside().fit().into(pic);
-        franame.setText(getArguments().getString("price"));
-        fracena.setText(getArguments().getString("foodname"));
+        Picasso.with(getActivity()).load(R.drawable.vegan).centerInside().fit().into(veganska);
+        franame.setText(getArguments().getString("foodname"));
+        fracena.setText("Price: " + getArguments().getString("price"));
+        boolean veganskahrana = getArguments().getBoolean("veganska");
+        veganska.setVisibility(View.INVISIBLE);
+        if (veganskahrana){veganska.setVisibility(View.VISIBLE);}else {veganska.setVisibility(View.INVISIBLE);}
 
         return view;
 

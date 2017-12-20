@@ -8,27 +8,39 @@
 
     <TextView
         android:id="@+id/imerestoran"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:gravity="center"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         />
 
     <ImageView
         android:id="@+id/slikarestoran"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/imerestoran"
         android:layout_width="match_parent"
         android:layout_height="150dp" />
 
     <TextView
         android:id="@+id/location"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
         android:layout_below="@+id/slikarestoran"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <RatingBar
         android:id="@+id/rejtingrestoran"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/location"
+        android:textColor="@color/black"
+        android:layout_above="@+id/rvmenu"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:isIndicator="true"
         android:stepSize="0.1"
         style="?android:attr/ratingBarStyleSmall"
@@ -36,7 +48,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvmenu"
-        android:layout_below="@+id/rejtingrestoran"
+        android:background="@color/colorPrimary"
+        android:layout_below="@+id/location"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

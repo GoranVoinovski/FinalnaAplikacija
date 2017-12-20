@@ -60,9 +60,16 @@ public class RVMeniAdapter extends RecyclerView.Adapter<RVMeniAdapter.ViewHolder
     @Override
     public void onBindViewHolder(RVMeniAdapter.ViewHolder holder, final int position) {
         final Menu mennu = meni.menu.get(position);
+        Picasso.with(context).load(R.drawable.vegan).centerInside().fit().into(holder.veganhrana);
+        boolean  eVegan = mennu.isIsveg();
+        holder.veganhrana.setVisibility(View.INVISIBLE);
+        if (eVegan){
+            holder.veganhrana.setVisibility(View.VISIBLE);
+        }else {holder.veganhrana.setVisibility(View.INVISIBLE);}
         Picasso.with(context).load(mennu.getLink()).centerInside().fit().into(holder.hranaimg);
         holder.hrananame.setText(mennu.getFoodname());
-        holder.cena.setText(mennu.getPrice());
+        holder.cena.setText("Price: " + mennu.getPrice());
+
         holder.hranaimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +92,7 @@ public class RVMeniAdapter extends RecyclerView.Adapter<RVMeniAdapter.ViewHolder
         @BindView(R.id.slikahrana)ImageView hranaimg;
         @BindView(R.id.nazivhrana)TextView hrananame;
         @BindView(R.id.cenahrana)TextView cena;
+        @BindView(R.id.vegan)ImageView veganhrana;
 
 
 

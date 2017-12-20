@@ -33,11 +33,12 @@ public class Main4Activity extends AppCompatActivity {
         Intent pozicija = getIntent();
         meni = (Restorani) pozicija.getSerializableExtra("Restoran");
         int position = pozicija.getIntExtra("Position", 0);
-        mojPager.setCurrentItem(position);
+
         adapter = new SlikiAdapter(this.getSupportFragmentManager());
 
         adapter.addSliki(meni.menu);
         mojPager.setAdapter(adapter);
+        mojPager.setCurrentItem(position);
 
     }
 

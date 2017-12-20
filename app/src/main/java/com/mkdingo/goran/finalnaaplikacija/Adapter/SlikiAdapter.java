@@ -39,6 +39,7 @@ public class SlikiAdapter extends FragmentPagerAdapter{
             args.putString("link", menu.get(position).getLink());
             args.putString("price", menu.get(position).getPrice());
             args.putString("foodname", menu.get(position).getFoodname());
+            args.putBoolean("veganska", menu.get(position).isIsveg());
             FragmentMeni fragment = new FragmentMeni();
             fragment.setArguments(args);
             return fragment;

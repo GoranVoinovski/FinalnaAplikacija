@@ -7,35 +7,76 @@
     android:layout_height="match_parent"
     tools:context="com.mkdingo.goran.finalnaaplikacija.Main2Activity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/opengallery"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/addlogo"/>
+
+
     <ImageView
         android:layout_marginTop="20dp"
         android:id="@+id/logo"
         android:hint="Logo of the Restaurant"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
+    </FrameLayout>
+    <EditText
+        android:id="@+id/name"
+        android:hint="Name of Restaurant"
+        android:paddingLeft="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edttextaddrestoran"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
     <EditText
         android:id="@+id/city"
         android:hint="Location"
+        android:paddingLeft="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/edttextaddrestoran"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
 
-
-    <EditText
-        android:id="@+id/name"
-        android:hint="Name of Restaurant"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <RatingBar
+        android:layout_marginTop="10dp"
         android:id="@+id/rating"
         android:hint="rating of the Restaurant"
         android:numStars="5"
         android:stepSize="0.1"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+
+    <TextView
+        android:id="@+id/ratingnum"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/light_blue_700"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="@color/white"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
         android:id="@+id/saverestaurant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
