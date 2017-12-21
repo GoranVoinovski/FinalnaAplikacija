@@ -40,6 +40,7 @@ public class SlikiAdapter extends FragmentPagerAdapter{
             args.putString("price", menu.get(position).getPrice());
             args.putString("foodname", menu.get(position).getFoodname());
             args.putBoolean("veganska", menu.get(position).isIsveg());
+            args.putInt("pozicija",position);
             FragmentMeni fragment = new FragmentMeni();
             fragment.setArguments(args);
             return fragment;

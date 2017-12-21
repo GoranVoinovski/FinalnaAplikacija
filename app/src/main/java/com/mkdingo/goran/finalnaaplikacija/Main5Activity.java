@@ -25,40 +25,53 @@ public class Main5Activity extends AppCompatActivity {
     @BindView(R.id.price)TextView cenahrana;
     @BindView(R.id.vegan)RadioButton veganska;
     @BindView(R.id.notvegan)RadioButton neveganska;
-    Menu meni;
     Uri pickedImage;
     String slika;
-
+    Menu meni;
+    boolean veganskaE;
+    String klik = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main5);
         ButterKnife.bind(this);
 
+        Intent intent = getIntent();
+        if (intent.hasExtra("Meni")){
+            klik = "edit";
+         meni = (Menu)intent.getSerializableExtra("Meni");
+         Picasso.with(this).load(meni.getLink()).centerInside().fit().into(slikahrana);
+         slika = meni.getLink();
+         imehrana.setText(meni.getFoodname());
+         cenahrana.setText(meni.getPrice());
+         veganskaE = meni.isIsveg();
+         veganska.setChecked(false);
+         neveganska.setChecked(false);
+         if (veganskaE){
+             veganska.setChecked(true);
 
-
-
-
+         }else{
+             neveganska.setChecked(true);}
+        }
     }
 
 
     @OnClick(R.id.btnaddmenu)
     public void Add(){
-        boolean isVegan = true;
-        if (veganska.isChecked()){
-            isVegan = true;
-        }else {isVegan = false;}
-        String ime = imehrana.getText().toString();
-        String cena = cenahrana.getText().toString();
-        Menu menu = new Menu(slika,cena,ime,isVegan);
-        Intent intentnovmeni = new Intent();
-        intentnovmeni.putExtra("NovoMeni",menu);
-        setResult(RESULT_OK,intentnovmeni);
-        finish();
-
-
-
-    }
+            boolean isVegan = true;
+            if (veganska.isChecked()) {
+                isVegan = true;
+            } else {
+                isVegan = false;
+            }
+            String ime = imehrana.getText().toString();
+            String cena = cenahrana.getText().toString();
+            Menu menu = new Menu(slika, cena, ime, isVegan);
+            Intent intentnovmeni = new Intent();
+            intentnovmeni.putExtra("NovoMeni", menu);
+            setResult(RESULT_OK, intentnovmeni);
+            finish();
+        }
 
     @OnClick(R.id.opengallery)
     public void OpenGalerry(){

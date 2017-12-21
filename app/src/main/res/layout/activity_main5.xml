@@ -56,6 +56,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
+<RadioGroup
+    android:id="@+id/rg"
+    android:layout_below="@id/price"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <RadioButton
         android:layout_below="@id/price"
@@ -75,10 +81,10 @@
         android:text="Non-Vegetarian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
+</RadioGroup>
     <Button
         android:id="@+id/btnaddmenu"
-        android:layout_below="@id/vegan"
+        android:layout_below="@id/rg"
         android:layout_marginTop="30dp"
         android:text="add menu"
         android:textColor="@color/white"

@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Main3Activity.class);
                 intent.putExtra("Restoran",restoran);
                 intent.putExtra("pozicija",position);
-                startActivity(intent);
-            }
+                startActivityForResult(intent,1000);
+//                finish();
+       }
 
             @Override
             public void onRestoranLongClick(Restorani restoran, final int position) {
