@@ -24,7 +24,8 @@
         <activity android:name=".RestoranAktiviti" />
         <activity android:name=".AktivitiFragmenti" />
         <activity android:name=".EditAddFood" />
-        <activity android:name=".EditRestoran"></activity>
+        <activity android:name=".EditRestoran" />
+        <activity android:name=".RegistracijaZaNaracka"></activity>
     </application>
 
 </manifest>
