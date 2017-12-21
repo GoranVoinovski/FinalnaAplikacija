@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mkdingo.goran.finalnaaplikacija.Main6Activity">
+    tools:context="com.mkdingo.goran.finalnaaplikacija.EditRestoran">
 
 </android.support.constraint.ConstraintLayout>

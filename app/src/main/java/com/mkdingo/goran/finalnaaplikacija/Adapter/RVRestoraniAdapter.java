@@ -1,7 +1,6 @@
 package com.mkdingo.goran.finalnaaplikacija.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mkdingo.goran.finalnaaplikacija.Main3Activity;
-import com.mkdingo.goran.finalnaaplikacija.MainActivity;
 import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
 import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
 import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniOnClickListener;
@@ -19,7 +16,6 @@ import com.mkdingo.goran.finalnaaplikacija.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

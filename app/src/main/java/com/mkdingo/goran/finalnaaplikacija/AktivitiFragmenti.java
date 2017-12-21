@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Main4Activity extends AppCompatActivity {
+public class AktivitiFragmenti extends AppCompatActivity {
 
     @BindView(R.id.pager)
     ViewPager mojPager;

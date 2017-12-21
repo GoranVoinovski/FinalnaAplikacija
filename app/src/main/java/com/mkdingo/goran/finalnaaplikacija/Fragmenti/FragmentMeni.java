@@ -1,11 +1,9 @@
 package com.mkdingo.goran.finalnaaplikacija.Fragmenti;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mkdingo.goran.finalnaaplikacija.Adapter.RVMeniAdapter;
-import com.mkdingo.goran.finalnaaplikacija.Main3Activity;
-import com.mkdingo.goran.finalnaaplikacija.Main4Activity;
-import com.mkdingo.goran.finalnaaplikacija.Main5Activity;
-import com.mkdingo.goran.finalnaaplikacija.MainActivity;
+import com.mkdingo.goran.finalnaaplikacija.AktivitiFragmenti;
+import com.mkdingo.goran.finalnaaplikacija.EditAddFood;
 import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
 import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
@@ -97,7 +92,7 @@ public class FragmentMeni extends Fragment {
         meni.setFoodname(ime);
         meni.setLink(slika);
         meni.setIsveg(vegan);
-        Intent intent = new Intent(getActivity(), Main5Activity.class);
+        Intent intent = new Intent(getActivity(), EditAddFood.class);
         intent.putExtra("Meni",meni);
         startActivityForResult(intent,2000);
 
@@ -126,7 +121,7 @@ public class FragmentMeni extends Fragment {
                 restorani.restaurants.remove(pos);
                 restorani.restaurants.add(pos, restoranodbran);
                 RestoranPreferences.addRestoran(restorani,getActivity());
-                ((Main4Activity)getActivity()).adapter.notifyDataSetChanged();
+                ((AktivitiFragmenti)getActivity()).adapter.notifyDataSetChanged();
 
             }
 

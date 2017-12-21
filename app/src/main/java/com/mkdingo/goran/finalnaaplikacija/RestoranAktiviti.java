@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Main3Activity extends AppCompatActivity {
+public class RestoranAktiviti extends AppCompatActivity {
     @BindView(R.id.imerestoran)TextView imenakliknatrestoran;
     @BindView(R.id.slikarestoran)ImageView slikanakliknatrestoran;
     @BindView(R.id.location)TextView lokacijanakliknatrestoran;
@@ -57,7 +57,7 @@ public class Main3Activity extends AppCompatActivity {
             adapter = new RVMeniAdapter(this, new OnImageClickListener() {
                 @Override
                 public void onImageClick(Menu meni, int position) {
-                    Intent intent = new Intent(Main3Activity.this, Main4Activity.class);
+                    Intent intent = new Intent(RestoranAktiviti.this, AktivitiFragmenti.class);
                     intent.putExtra("Restoran",restoranodbran);
                     intent.putExtra("Position", pozicija);
                     intent.putExtra("Position1", position);
@@ -84,18 +84,18 @@ public class Main3Activity extends AppCompatActivity {
     @OnClick(R.id.editrestoran)
     public void AddMenu(){
 
-        PopupMenu popup = new PopupMenu(Main3Activity.this, popupmenu);
+        PopupMenu popup = new PopupMenu(RestoranAktiviti.this, popupmenu);
         popup.getMenuInflater().inflate(R.menu.popupedit, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.one:
-                        Intent add = new Intent(Main3Activity.this,Main5Activity.class);
+                        Intent add = new Intent(RestoranAktiviti.this,EditAddFood.class);
                         startActivityForResult(add,1111);
                         break;
                     case R.id.two:
-                        Intent edit = new Intent(Main3Activity.this,Main6Activity.class);
+                        Intent edit = new Intent(RestoranAktiviti.this,EditRestoran.class);
                         edit.putExtra("restaurant",restoranodbran);
                         startActivityForResult(edit,1111);
                         break;
@@ -142,7 +142,7 @@ public class Main3Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        Intent intent = new Intent(Main3Activity.this,MainActivity.class);
+//        Intent intent = new Intent(RestoranAktiviti.this,PocetnoMeni.class);
 //        startActivity(intent);
         Intent intent = new Intent();
         setResult(RESULT_OK,intent);

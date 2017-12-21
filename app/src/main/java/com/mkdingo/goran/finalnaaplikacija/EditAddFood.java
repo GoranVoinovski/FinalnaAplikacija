@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Main5Activity extends AppCompatActivity {
+public class EditAddFood extends AppCompatActivity {
     @BindView(R.id.opengallery)Button galerija;
     @BindView(R.id.btnaddmenu)Button addmenu;
     @BindView(R.id.articleimg)ImageView slikahrana;
