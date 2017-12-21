@@ -78,7 +78,13 @@ public class RVMeniAdapter extends RecyclerView.Adapter<RVMeniAdapter.ViewHolder
 
             }
         });
-
+        holder.hranaimg.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                onImageClickListener.onImageLongClick(mennu,position);
+                return true;
+            }
+        });
 
 
     }

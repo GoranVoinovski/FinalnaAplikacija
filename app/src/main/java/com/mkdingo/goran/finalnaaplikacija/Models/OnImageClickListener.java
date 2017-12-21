@@ -7,4 +7,6 @@ package com.mkdingo.goran.finalnaaplikacija.Models;
 public interface OnImageClickListener {
 
     public void onImageClick(Menu meni, int position);
+    public void onImageLongClick(Menu meni, int position);
+
 }

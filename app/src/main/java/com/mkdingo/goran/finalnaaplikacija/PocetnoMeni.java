@@ -52,8 +52,7 @@ public class PocetnoMeni extends AppCompatActivity {
         order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getNaracki());
         poracka.setText(order.getTelnumber() + "\nSign Out");
         }else {
-
-         poracka.setText("Sign In");
+            poracka.setText("Sign in");
         }
 
         model.restaurants = new ArrayList<>();
@@ -64,6 +63,7 @@ public class PocetnoMeni extends AppCompatActivity {
                 Intent intent = new Intent(PocetnoMeni.this, RestoranAktiviti.class);
                 intent.putExtra("Restoran", restoran);
                 intent.putExtra("pozicija", position);
+                intent.putExtra("order", order);
                 startActivityForResult(intent, 1000);
 
             }

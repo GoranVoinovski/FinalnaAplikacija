@@ -7,14 +7,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mkdingo.goran.finalnaaplikacija.Adapter.RVMeniAdapter;
 import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Models.OnImageClickListener;
+import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
 import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
 import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
 import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
@@ -31,12 +34,14 @@ public class RestoranAktiviti extends AppCompatActivity {
     @BindView(R.id.rejtingrestoran)RatingBar rejtingnakliknatrestoran;
     @BindView(R.id.rvmenu)RecyclerView rvmeni;
     @BindView(R.id.editrestoran) Button popupmenu;
+    @BindView(R.id.checkout) Button cart;
     Restorani meni;
     RestoraniModel restorani;
     Menu meninovo;
     Restorani restoranodbran;
     public RVMeniAdapter adapter;
     int pozicija = 0;
+    Orders order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +49,14 @@ public class RestoranAktiviti extends AppCompatActivity {
         setContentView(R.layout.restoranaktiviti);
         ButterKnife.bind(this);
         restorani = RestoranPreferences.getRestoran(this);
+        cart.setVisibility(View.INVISIBLE);
+        cart.setText("Checkout");
 
         Intent intent = getIntent();
         if (intent.hasExtra("Restoran")){
           pozicija = intent.getIntExtra("pozicija",0);
           restoranodbran = (Restorani) intent.getSerializableExtra("Restoran");
+          order = (Orders) intent.getSerializableExtra("order");
           imenakliknatrestoran.setText(restoranodbran.getName());
           Picasso.with(this).load(restoranodbran.getLogo()).centerInside().fit().into(slikanakliknatrestoran);
           lokacijanakliknatrestoran.setText("Location: " + restoranodbran.getCity());
@@ -65,6 +73,15 @@ public class RestoranAktiviti extends AppCompatActivity {
 
                 }
 
+                @Override
+                public void onImageLongClick(Menu meni, int position) {
+                    order.getNaracki().add(meni);
+                    cart.setVisibility(View.VISIBLE);
+                    String longclicktekst = "You added "+ meni.getFoodname() + " in your cart";
+                    Toast.makeText(RestoranAktiviti.this,longclicktekst,Toast.LENGTH_LONG).show();
+                    adapter.notifyDataSetChanged();
+                }
+
             });
 
             adapter.setItems(restoranodbran.menu);
@@ -78,6 +95,16 @@ public class RestoranAktiviti extends AppCompatActivity {
             adapter.setItems(restoranodbran.menu);
             adapter.notifyDataSetChanged();
         }
+
+    }
+
+    @OnClick(R.id.checkout)
+    public void Checkout(){
+
+        Intent intent = new Intent(RestoranAktiviti.this,Checkout.class);
+        intent.putExtra("Order",order);
+        startActivity(intent);
+
 
     }
 
