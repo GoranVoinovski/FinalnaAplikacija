@@ -20,6 +20,7 @@ import butterknife.OnClick;
 
 public class RegistracijaZaNaracka extends AppCompatActivity {
     @BindView(R.id.telephone)EditText telBroj;
+    @BindView(R.id.username)EditText user;
     @BindView(R.id.savetelnumber)Button save;
 
     @Override
@@ -34,8 +35,9 @@ public class RegistracijaZaNaracka extends AppCompatActivity {
     @OnClick(R.id.savetelnumber)
     public void SaveNum(){
         int tel = Integer.parseInt(telBroj.getText().toString());
+        String imeNaUser = user.getText().toString();
         ArrayList<Menu> naracki = new ArrayList<>();
-        Orders orders = new Orders(tel,naracki);
+        Orders orders = new Orders(tel,imeNaUser,naracki);
         Intent intent = new Intent();
         intent.putExtra("OrderNum",orders);
         setResult(RESULT_OK,intent);

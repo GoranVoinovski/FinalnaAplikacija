@@ -10,14 +10,20 @@ import android.widget.TextView;
 import com.mkdingo.goran.finalnaaplikacija.Adapter.CheckoutAdapter;
 import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
+import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Checkout extends AppCompatActivity {
     Orders order;
+    Orders orders;
+    String restoran = "";
+    int pozicija;
+
     Menu menu;
     @BindView(R.id.rvorders)RecyclerView orersRV;
     @BindView(R.id.overall)TextView smetka;
@@ -30,17 +36,29 @@ public class Checkout extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra("Order")){
-
            order = (Orders) intent.getSerializableExtra("Order");
+           orders = (Orders) intent.getSerializableExtra("orders");
+           restoran =  intent.getStringExtra("restoran");
+           pozicija = intent.getIntExtra("pozzicijaRestoran",0);
         }
 
-        smetka.setText("Overall price: "+ Smetka(order.getNaracki()));
+        smetka.setText(order.getUsername() + " your total receipt is: "+ Smetka(order.getNaracki()));
         checkoutAdapter = new CheckoutAdapter();
 
         checkoutAdapter.setItems(order.getNaracki());
         orersRV.setHasFixedSize(true);
         orersRV.setLayoutManager(new LinearLayoutManager(this));
         orersRV.setAdapter(checkoutAdapter);
+
+    }
+
+
+    @OnClick(R.id.plati)
+    public void Plati (){
+        Intent intent = new Intent(Checkout.this,RestoraniProfit.class);
+        intent.putExtra("orders",orders);
+        intent.putExtra("restoran",restoran);
+        startActivity(intent);
 
     }
 

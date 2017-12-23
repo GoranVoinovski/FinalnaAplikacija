@@ -7,14 +7,28 @@
     tools:context="com.mkdingo.goran.finalnaaplikacija.RegistracijaZaNaracka">
 
     <EditText
-        android:id="@+id/telephone"
-        android:hint="Enter telephone number"
+        android:id="@+id/username"
+        android:hint="Enter username"
         android:layout_width="match_parent"
         android:padding="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="180dp"
         android:layout_height="50dp"
+        android:inputType="textCapSentences"
+        android:background="@drawable/edttextaddrestoran"/>
+
+
+    <EditText
+        android:id="@+id/telephone"
+        android:hint="Enter telephone number"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/username"
         android:inputType="number"
         android:background="@drawable/edttextaddrestoran"/>
 

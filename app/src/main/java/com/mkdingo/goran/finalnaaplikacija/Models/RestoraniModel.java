@@ -11,4 +11,5 @@ public class RestoraniModel implements Serializable {
 
     public ArrayList<Restorani>restaurants;
     public ArrayList<Menu>menu;
+    public ArrayList<Menu>poracki;
 }

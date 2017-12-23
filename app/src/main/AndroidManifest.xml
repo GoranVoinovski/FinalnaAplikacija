@@ -26,7 +26,8 @@
         <activity android:name=".EditAddFood" />
         <activity android:name=".EditRestoran" />
         <activity android:name=".RegistracijaZaNaracka" />
-        <activity android:name=".Checkout"></activity>
+        <activity android:name=".Checkout" />
+        <activity android:name=".RestoraniProfit"></activity>
     </application>
 
 </manifest>

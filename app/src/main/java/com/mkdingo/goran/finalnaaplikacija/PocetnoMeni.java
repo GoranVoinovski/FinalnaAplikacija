@@ -49,8 +49,8 @@ public class PocetnoMeni extends AppCompatActivity {
         sign = "Order";
         gson = new Gson();
         Orders ordersnimen = gson.fromJson(preferences.getString("Order", ""), Orders.class);
-        order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getNaracki());
-        poracka.setText(order.getTelnumber() + "\nSign Out");
+        order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki());
+        poracka.setText(order.getUsername() + "\nSign Out");
         }else {
             poracka.setText("Sign in");
         }
@@ -122,7 +122,7 @@ public class PocetnoMeni extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }else if (resultCode == RESULT_OK && requestCode == 1500){
             Orders ordersnimen = (Orders) data.getSerializableExtra("OrderNum");
-            order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getNaracki());
+            order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki());
             gson = new Gson();
             String mapString = gson.toJson(order);
             preferences.edit().putString("Order", mapString).apply();

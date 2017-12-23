@@ -10,10 +10,12 @@ import java.util.ArrayList;
 public class Orders implements Serializable {
 
     int telnumber;
-    ArrayList<Menu>naracki;
+    String username;
+    public ArrayList<Menu>naracki;
 
-    public Orders(int telnumber, ArrayList<Menu> naracki) {
+    public Orders(int telnumber,String username, ArrayList<Menu> naracki) {
         this.telnumber = telnumber;
+        this.username = username;
         this.naracki = naracki;
     }
 
@@ -23,6 +25,14 @@ public class Orders implements Serializable {
 
     public void setTelnumber(int telnumber) {
         this.telnumber = telnumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public ArrayList<Menu> getNaracki() {

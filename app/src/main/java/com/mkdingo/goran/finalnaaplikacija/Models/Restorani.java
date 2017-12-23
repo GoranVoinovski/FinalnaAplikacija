@@ -12,8 +12,7 @@ public class Restorani implements Serializable{
     String city;
     String name;
     String rating;
-public ArrayList<Menu> menu;
-
+    public ArrayList<Menu> menu;
     public Restorani(String logo, String city, String name, String rating, ArrayList<Menu> menu) {
         this.logo = logo;
         this.city = city;

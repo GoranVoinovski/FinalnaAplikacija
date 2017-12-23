@@ -1,6 +1,7 @@
 package com.mkdingo.goran.finalnaaplikacija;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.mkdingo.goran.finalnaaplikacija.Adapter.RVMeniAdapter;
 import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Models.OnImageClickListener;
@@ -22,6 +24,8 @@ import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
 import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
 import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,23 +39,26 @@ public class RestoranAktiviti extends AppCompatActivity {
     @BindView(R.id.rvmenu)RecyclerView rvmeni;
     @BindView(R.id.editrestoran) Button popupmenu;
     @BindView(R.id.checkout) Button cart;
-    Restorani meni;
     RestoraniModel restorani;
     Menu meninovo;
     Restorani restoranodbran;
+    SharedPreferences preferences;
     public RVMeniAdapter adapter;
     int pozicija = 0;
+    public static String restoran;
     Orders order;
+    Orders orders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restoranaktiviti);
         ButterKnife.bind(this);
+        preferences = getSharedPreferences("ListaPoracki",MODE_PRIVATE);
+
         restorani = RestoranPreferences.getRestoran(this);
         cart.setVisibility(View.INVISIBLE);
         cart.setText("Checkout");
-
         Intent intent = getIntent();
         if (intent.hasExtra("Restoran")){
           pozicija = intent.getIntExtra("pozicija",0);
@@ -62,6 +69,15 @@ public class RestoranAktiviti extends AppCompatActivity {
           lokacijanakliknatrestoran.setText("Location: " + restoranodbran.getCity());
           float rejting = Float.parseFloat(restoranodbran.getRating());
           rejtingnakliknatrestoran.setRating(rejting);
+            Gson gson2 = new Gson();
+            if (preferences.contains("Poracka")){
+                orders = gson2.fromJson(preferences.getString("Poracka",""),Orders.class);
+            }
+            else{
+                ArrayList<Menu> naracki = new ArrayList<>();
+                orders = new Orders(order.getTelnumber(),order.getUsername(),naracki);
+
+            }
             adapter = new RVMeniAdapter(this, new OnImageClickListener() {
                 @Override
                 public void onImageClick(Menu meni, int position) {
@@ -76,6 +92,11 @@ public class RestoranAktiviti extends AppCompatActivity {
                 @Override
                 public void onImageLongClick(Menu meni, int position) {
                     order.getNaracki().add(meni);
+                    orders.naracki.add(meni);
+                    Gson gson = new Gson();
+                    String map = gson.toJson(orders);
+                    preferences.edit().putString("Poracka",map).apply();
+                    restoran = restoranodbran.getName();
                     cart.setVisibility(View.VISIBLE);
                     String longclicktekst = "You added "+ meni.getFoodname() + " in your cart";
                     Toast.makeText(RestoranAktiviti.this,longclicktekst,Toast.LENGTH_LONG).show();
@@ -84,11 +105,14 @@ public class RestoranAktiviti extends AppCompatActivity {
 
             });
 
+
             adapter.setItems(restoranodbran.menu);
             rvmeni.setHasFixedSize(true);
             rvmeni.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
             rvmeni.setAdapter(adapter);
         }else {}
+
+
 
         Intent intent2 = getIntent();
         if (intent2.hasExtra("Refresh")){
@@ -103,7 +127,9 @@ public class RestoranAktiviti extends AppCompatActivity {
 
         Intent intent = new Intent(RestoranAktiviti.this,Checkout.class);
         intent.putExtra("Order",order);
-        startActivity(intent);
+        intent.putExtra("orders",orders);
+        intent.putExtra("restoran",restoranodbran);
+        startActivityForResult(intent,1000);
 
 
     }
@@ -126,6 +152,13 @@ public class RestoranAktiviti extends AppCompatActivity {
                         edit.putExtra("restaurant",restoranodbran);
                         startActivityForResult(edit,1111);
                         break;
+
+                    case R.id.three:
+                        Intent check = new Intent(RestoranAktiviti.this,RestoraniProfit.class);
+                        check.putExtra("restaurant",restoranodbran);
+                        check.putExtra("orders",order);
+                        startActivityForResult(check,1111);
+                        break;
                 }
                 return true;
             }
@@ -137,31 +170,33 @@ public class RestoranAktiviti extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == 1111);
-        if (data.hasExtra("NovoMeni")) {
-            meninovo = (Menu) data.getSerializableExtra("NovoMeni");
-            restoranodbran.menu.add(meninovo);
-            restorani.restaurants.remove(pozicija);
-            restorani.restaurants.add(pozicija, restoranodbran);
-            RestoranPreferences.addRestoran(restorani, this);
-            adapter.notifyDataSetChanged();
-        }else if (data.hasExtra("Restoran")){
-            Restorani restorance = (Restorani) data.getSerializableExtra("Restoran");
-            imenakliknatrestoran.setText(restorance.getName());
-            Picasso.with(this).load(restorance.getLogo()).centerInside().fit().into(slikanakliknatrestoran);
-            lokacijanakliknatrestoran.setText("Location: " + restorance.getCity());
-            float rejting = Float.parseFloat(restorance.getRating());
-            rejtingnakliknatrestoran.setRating(rejting);
-            restorani.restaurants.remove(pozicija);
-            restorani.restaurants.add(pozicija, restorance);
-            RestoranPreferences.addRestoran(restorani, this);
-            rvmeni.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }else if (data.hasExtra("Refresh")){
-            restorani = RestoranPreferences.getRestoran(this);
-            restoranodbran = restorani.restaurants.get(pozicija);
-            adapter.setItems(restoranodbran.menu);
-            rvmeni.setAdapter(adapter);
+        if (resultCode == RESULT_OK && requestCode == 1111){
+            if (data.hasExtra("NovoMeni")) {
+                meninovo = (Menu) data.getSerializableExtra("NovoMeni");
+                restoranodbran.menu.add(meninovo);
+                restorani.restaurants.remove(pozicija);
+                restorani.restaurants.add(pozicija, restoranodbran);
+                RestoranPreferences.addRestoran(restorani, this);
+                adapter.notifyDataSetChanged();
+            }else if (data.hasExtra("Restoran")){
+                Restorani restorance = (Restorani) data.getSerializableExtra("Restoran");
+                imenakliknatrestoran.setText(restorance.getName());
+                Picasso.with(this).load(restorance.getLogo()).centerInside().fit().into(slikanakliknatrestoran);
+                lokacijanakliknatrestoran.setText("Location: " + restorance.getCity());
+                float rejting = Float.parseFloat(restorance.getRating());
+                rejtingnakliknatrestoran.setRating(rejting);
+                restorani.restaurants.remove(pozicija);
+                restorani.restaurants.add(pozicija, restorance);
+                RestoranPreferences.addRestoran(restorani, this);
+                rvmeni.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }else if (data.hasExtra("Refresh")){
+                restorani = RestoranPreferences.getRestoran(this);
+                restoranodbran = restorani.restaurants.get(pozicija);
+                adapter.setItems(restoranodbran.menu);
+                rvmeni.setAdapter(adapter);}
+
+        }else if (resultCode == RESULT_OK && requestCode == 0000){
 
         }
 
