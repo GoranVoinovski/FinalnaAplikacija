@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mkdingo.goran.finalnaaplikacija.Adapter.RVRestoraniAdapter;
@@ -49,7 +50,7 @@ public class PocetnoMeni extends AppCompatActivity {
         sign = "Order";
         gson = new Gson();
         Orders ordersnimen = gson.fromJson(preferences.getString("Order", ""), Orders.class);
-        order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki());
+        order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki(),ordersnimen.restorants);
         poracka.setText(order.getUsername() + "\nSign Out");
         }else {
             poracka.setText("Sign in");
@@ -60,11 +61,14 @@ public class PocetnoMeni extends AppCompatActivity {
             @Override
             public void
             onRestoranClick(Restorani restoran, int position) {
+                if (order != null){
                 Intent intent = new Intent(PocetnoMeni.this, RestoranAktiviti.class);
                 intent.putExtra("Restoran", restoran);
                 intent.putExtra("pozicija", position);
                 intent.putExtra("order", order);
-                startActivityForResult(intent, 1000);
+                startActivityForResult(intent, 1000);}else {
+                    Toast.makeText(PocetnoMeni.this, "Please sign in", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
@@ -122,7 +126,7 @@ public class PocetnoMeni extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }else if (resultCode == RESULT_OK && requestCode == 1500){
             Orders ordersnimen = (Orders) data.getSerializableExtra("OrderNum");
-            order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki());
+            order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki(),ordersnimen.restorants);
             gson = new Gson();
             String mapString = gson.toJson(order);
             preferences.edit().putString("Order", mapString).apply();

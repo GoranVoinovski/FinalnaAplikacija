@@ -20,7 +20,7 @@ import butterknife.OnClick;
 
 public class Checkout extends AppCompatActivity {
     Orders order;
-    Orders orders;
+    public Orders orders;
     String restoran = "";
     int pozicija;
 

@@ -6,9 +6,11 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.squareup.picasso.Picasso;
@@ -21,8 +23,8 @@ public class EditAddFood extends AppCompatActivity {
     @BindView(R.id.opengallery)Button galerija;
     @BindView(R.id.btnaddmenu)Button addmenu;
     @BindView(R.id.articleimg)ImageView slikahrana;
-    @BindView(R.id.name)TextView imehrana;
-    @BindView(R.id.price)TextView cenahrana;
+    @BindView(R.id.name)EditText imehrana;
+    @BindView(R.id.price)EditText cenahrana;
     @BindView(R.id.vegan)RadioButton veganska;
     @BindView(R.id.notvegan)RadioButton neveganska;
     Uri pickedImage;
@@ -58,19 +60,23 @@ public class EditAddFood extends AppCompatActivity {
 
     @OnClick(R.id.btnaddmenu)
     public void Add(){
-            boolean isVegan = true;
-            if (veganska.isChecked()) {
-                isVegan = true;
-            } else {
-                isVegan = false;
-            }
-            String ime = imehrana.getText().toString();
-            String cena = cenahrana.getText().toString();
-            Menu menu = new Menu(slika, cena, ime, isVegan);
-            Intent intentnovmeni = new Intent();
-            intentnovmeni.putExtra("NovoMeni", menu);
-            setResult(RESULT_OK, intentnovmeni);
-            finish();
+           if (imehrana.length()>0 && cenahrana.length()>0){
+               boolean isVegan = true;
+               if (veganska.isChecked()) {
+                   isVegan = true;
+               } else {
+                   isVegan = false;
+               }
+               String ime = imehrana.getText().toString();
+               String cena = cenahrana.getText().toString();
+               Menu menu = new Menu(slika, cena, ime, isVegan);
+               Intent intentnovmeni = new Intent();
+               intentnovmeni.putExtra("NovoMeni", menu);
+               setResult(RESULT_OK, intentnovmeni);
+               finish();
+           }else {
+               Toast.makeText(this, "Please fill all requested fields", Toast.LENGTH_SHORT).show();
+           }
         }
 
     @OnClick(R.id.opengallery)

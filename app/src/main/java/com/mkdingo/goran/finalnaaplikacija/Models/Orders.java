@@ -12,11 +12,13 @@ public class Orders implements Serializable {
     int telnumber;
     String username;
     public ArrayList<Menu>naracki;
+    public ArrayList<String>restorants;
 
-    public Orders(int telnumber,String username, ArrayList<Menu> naracki) {
+    public Orders(int telnumber,String username, ArrayList<Menu> naracki,ArrayList<String>restorants) {
         this.telnumber = telnumber;
         this.username = username;
         this.naracki = naracki;
+        this.restorants = restorants;
     }
 
     public int getTelnumber() {
@@ -41,5 +43,13 @@ public class Orders implements Serializable {
 
     public void setNaracki(ArrayList<Menu> naracki) {
         this.naracki = naracki;
+    }
+
+    public ArrayList<String> getRestorants() {
+        return restorants;
+    }
+
+    public void setRestorants(ArrayList<String> restorants) {
+        this.restorants = restorants;
     }
 }

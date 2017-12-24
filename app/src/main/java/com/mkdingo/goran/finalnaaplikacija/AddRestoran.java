@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
@@ -67,16 +68,21 @@ public class AddRestoran extends AppCompatActivity {
 
     @OnClick(R.id.saverestaurant)
     public void Save (){
-        if (slika.isEmpty()){
-           slika = "https://i.pinimg.com/736x/b5/5a/e8/b55ae88f3043f90addb5ef028e644325--restaurant-logo.jpg";
-        }else {}
-        restoran = new Restorani(slika,edtcity.getText().toString(),edtname.getText().toString(),rejting,meni);
-        restorani.restaurants.add(restoran);
-        RestoranPreferences.addRestoran(restorani,AddRestoran.this);
-        Intent intent = new Intent();
-        setResult(RESULT_OK,intent);
-        finish();
+       if (edtcity.length() > 0 && edtname.length() > 0 && brojrejting.length() > 0){
+           if (slika.isEmpty()){
+               slika = "https://i.pinimg.com/736x/b5/5a/e8/b55ae88f3043f90addb5ef028e644325--restaurant-logo.jpg";
+           }else {}
+           restoran = new Restorani(slika,edtcity.getText().toString(),edtname.getText().toString(),rejting,meni);
+           restorani.restaurants.add(restoran);
+           RestoranPreferences.addRestoran(restorani,AddRestoran.this);
+           Intent intent = new Intent();
+           setResult(RESULT_OK,intent);
+           finish();
 
+
+       }else{
+           Toast.makeText(this, "Please fill all requested fields", Toast.LENGTH_SHORT).show();
+       }
 
     }
 

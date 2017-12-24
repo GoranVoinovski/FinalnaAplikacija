@@ -10,36 +10,31 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.mkdingo.goran.finalnaaplikacija.Adapter.PorackiAdapter;
-import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
 import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RestoraniProfit extends AppCompatActivity {
-    @BindView(R.id.imenarestoran)TextView restoranIme;
+    public @BindView(R.id.imenarestoran)TextView restoranIme;
     @BindView(R.id.pprofitRV)RecyclerView profitRView;
     PorackiAdapter adapter;
     public Orders poracki;
-    public static String restorani = "";
-    SharedPreferences preferences;
+    public Restorani restoran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restorani_profit);
         ButterKnife.bind(this);
-        adapter = new PorackiAdapter();
+
+
         Intent intent = getIntent();
         poracki = (Orders) intent.getSerializableExtra("orders");
-        restorani = intent.getStringExtra("restoran");
 
 
-
-        adapter = new PorackiAdapter();
+        adapter = new PorackiAdapter(this);
         adapter.setItems(poracki.naracki);
         profitRView.setHasFixedSize(true);
         profitRView.setLayoutManager(new LinearLayoutManager(this));

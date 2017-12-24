@@ -16,9 +16,9 @@ import butterknife.ButterKnife;
 
 public class AktivitiFragmenti extends AppCompatActivity {
 
-    @BindView(R.id.pager)
+    public @BindView(R.id.pager)
     ViewPager mojPager;
-    Restorani meni;
+    public Restorani meni;
     Menu meninovo;
     public SlikiAdapter adapter;
     public int position;

@@ -109,7 +109,7 @@ public class FragmentMeni extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == getActivity().RESULT_OK && requestCode == 2000) {
             if (data.hasExtra("NovoMeni")) {
-                Menu meni2 = (Menu) data.getSerializableExtra("NovoMeni");
+                meni2 = (Menu) data.getSerializableExtra("NovoMeni");
                 Picasso.with(getActivity()).load(meni2.getLink()).centerInside().fit().into(pic);
                 fracena.setText("Price: " + meni2.getPrice());
                 franame.setText(meni2.getFoodname());
@@ -122,6 +122,7 @@ public class FragmentMeni extends Fragment {
                 restorani.restaurants.add(pos, restoranodbran);
                 RestoranPreferences.addRestoran(restorani,getActivity());
                 ((AktivitiFragmenti)getActivity()).adapter.notifyDataSetChanged();
+
 
             }
 

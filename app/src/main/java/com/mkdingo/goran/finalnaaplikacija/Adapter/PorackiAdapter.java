@@ -7,9 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mkdingo.goran.finalnaaplikacija.Checkout;
 import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
+import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
 import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
 import com.mkdingo.goran.finalnaaplikacija.R;
 import com.mkdingo.goran.finalnaaplikacija.RestoranAktiviti;
 import com.mkdingo.goran.finalnaaplikacija.RestoraniProfit;
@@ -26,12 +27,15 @@ import butterknife.ButterKnife;
 public class PorackiAdapter extends RecyclerView.Adapter<PorackiAdapter.ViewHolder> {
 
    ArrayList<Menu>prices = new ArrayList<>();
+    Orders orders;
     Context context;
-    Restorani restorani;
-
     public void setItems(ArrayList<Menu>ceni){
 
         prices = ceni;
+    }
+
+    public PorackiAdapter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -52,8 +56,8 @@ public class PorackiAdapter extends RecyclerView.Adapter<PorackiAdapter.ViewHold
 
         holder.article.setText(menu.getFoodname());
         holder.articleprice.setText(menu.getPrice());
-        String restoran = ((RestoranAktiviti)context).restoran;
-        holder.user.setText(restoran);
+        ((RestoraniProfit)context).restoranIme.setText("Total orders balance: " + Smetka(prices));
+
 
     }
 
@@ -71,5 +75,17 @@ public class PorackiAdapter extends RecyclerView.Adapter<PorackiAdapter.ViewHold
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+    }
+
+    public int Smetka(ArrayList<Menu>meni){
+        int smetka = 0;
+        for (Menu menu:meni) {
+
+            int cena = Integer.parseInt(menu.getPrice());
+            smetka = smetka + cena;
+
+        }
+
+        return smetka;
     }
 }

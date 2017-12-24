@@ -41,21 +41,19 @@ public class RestoranAktiviti extends AppCompatActivity {
     @BindView(R.id.checkout) Button cart;
     RestoraniModel restorani;
     Menu meninovo;
-    Restorani restoranodbran;
+    public Restorani restoranodbran;
     SharedPreferences preferences;
     public RVMeniAdapter adapter;
     int pozicija = 0;
-    public static String restoran;
     Orders order;
-    Orders orders;
-
+    public Orders orders;
+    String ime = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restoranaktiviti);
         ButterKnife.bind(this);
         preferences = getSharedPreferences("ListaPoracki",MODE_PRIVATE);
-
         restorani = RestoranPreferences.getRestoran(this);
         cart.setVisibility(View.INVISIBLE);
         cart.setText("Checkout");
@@ -75,7 +73,8 @@ public class RestoranAktiviti extends AppCompatActivity {
             }
             else{
                 ArrayList<Menu> naracki = new ArrayList<>();
-                orders = new Orders(order.getTelnumber(),order.getUsername(),naracki);
+                ArrayList<String> restorants = new ArrayList<>();
+                orders = new Orders(order.getTelnumber(),order.getUsername(),naracki,restorants);
 
             }
             adapter = new RVMeniAdapter(this, new OnImageClickListener() {
@@ -96,7 +95,6 @@ public class RestoranAktiviti extends AppCompatActivity {
                     Gson gson = new Gson();
                     String map = gson.toJson(orders);
                     preferences.edit().putString("Poracka",map).apply();
-                    restoran = restoranodbran.getName();
                     cart.setVisibility(View.VISIBLE);
                     String longclicktekst = "You added "+ meni.getFoodname() + " in your cart";
                     Toast.makeText(RestoranAktiviti.this,longclicktekst,Toast.LENGTH_LONG).show();
@@ -152,13 +150,6 @@ public class RestoranAktiviti extends AppCompatActivity {
                         edit.putExtra("restaurant",restoranodbran);
                         startActivityForResult(edit,1111);
                         break;
-
-                    case R.id.three:
-                        Intent check = new Intent(RestoranAktiviti.this,RestoraniProfit.class);
-                        check.putExtra("restaurant",restoranodbran);
-                        check.putExtra("orders",order);
-                        startActivityForResult(check,1111);
-                        break;
                 }
                 return true;
             }
@@ -178,6 +169,8 @@ public class RestoranAktiviti extends AppCompatActivity {
                 restorani.restaurants.add(pozicija, restoranodbran);
                 RestoranPreferences.addRestoran(restorani, this);
                 adapter.notifyDataSetChanged();
+                adapter.setItems(restoranodbran.menu);
+                rvmeni.setAdapter(adapter);
             }else if (data.hasExtra("Restoran")){
                 Restorani restorance = (Restorani) data.getSerializableExtra("Restoran");
                 imenakliknatrestoran.setText(restorance.getName());

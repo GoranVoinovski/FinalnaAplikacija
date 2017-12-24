@@ -34,16 +34,25 @@ public class RegistracijaZaNaracka extends AppCompatActivity {
 
     @OnClick(R.id.savetelnumber)
     public void SaveNum(){
+
+        if (telBroj.length() > 0 && user.length() >  0){
         int tel = Integer.parseInt(telBroj.getText().toString());
         String imeNaUser = user.getText().toString();
         ArrayList<Menu> naracki = new ArrayList<>();
-        Orders orders = new Orders(tel,imeNaUser,naracki);
+        ArrayList<String> restornts = new ArrayList<>();
+        Orders orders = new Orders(tel,imeNaUser,naracki,restornts);
         Intent intent = new Intent();
         intent.putExtra("OrderNum",orders);
         setResult(RESULT_OK,intent);
-        finish();
+        finish();}else {
+            if (telBroj.length() == 0){
+                telBroj.setError("Enter your phone number to continue");
+            }else {user.setError("Enter your name to continue");}
+
+        }
+        }
 
 
     }
 
-}
+
