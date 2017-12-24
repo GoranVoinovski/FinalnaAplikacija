@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 public class PorackiAdapter extends RecyclerView.Adapter<PorackiAdapter.ViewHolder> {
 
    ArrayList<Menu>prices = new ArrayList<>();
-    Orders orders;
     Context context;
     public void setItems(ArrayList<Menu>ceni){
 
@@ -57,6 +56,14 @@ public class PorackiAdapter extends RecyclerView.Adapter<PorackiAdapter.ViewHold
         holder.article.setText(menu.getFoodname());
         holder.articleprice.setText(menu.getPrice());
         ((RestoraniProfit)context).restoranIme.setText("Total orders balance: " + Smetka(prices));
+        for (Restorani restorani:((RestoraniProfit)context).restoraniModel.restaurants){
+            for (Menu meni:restorani.menu){
+                if (menu.getFoodname().equals(meni.getFoodname()))
+                    holder.user.setText(restorani.getName());
+            }
+
+        }
+
 
 
     }

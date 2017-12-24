@@ -41,6 +41,7 @@ public class RestoranAktiviti extends AppCompatActivity {
     @BindView(R.id.checkout) Button cart;
     RestoraniModel restorani;
     Menu meninovo;
+    Menu menu;
     public Restorani restoranodbran;
     SharedPreferences preferences;
     public RVMeniAdapter adapter;
@@ -96,6 +97,7 @@ public class RestoranAktiviti extends AppCompatActivity {
                     String map = gson.toJson(orders);
                     preferences.edit().putString("Poracka",map).apply();
                     cart.setVisibility(View.VISIBLE);
+                    menu = meni;
                     String longclicktekst = "You added "+ meni.getFoodname() + " in your cart";
                     Toast.makeText(RestoranAktiviti.this,longclicktekst,Toast.LENGTH_LONG).show();
                     adapter.notifyDataSetChanged();
@@ -122,11 +124,11 @@ public class RestoranAktiviti extends AppCompatActivity {
 
     @OnClick(R.id.checkout)
     public void Checkout(){
-
         Intent intent = new Intent(RestoranAktiviti.this,Checkout.class);
         intent.putExtra("Order",order);
         intent.putExtra("orders",orders);
         intent.putExtra("restoran",restoranodbran);
+        intent.putExtra("meni",menu);
         startActivityForResult(intent,1000);
 
 

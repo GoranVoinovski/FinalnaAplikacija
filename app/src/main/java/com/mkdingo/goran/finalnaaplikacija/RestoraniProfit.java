@@ -10,8 +10,13 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.mkdingo.goran.finalnaaplikacija.Adapter.PorackiAdapter;
+import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
+import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
 import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
+import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +26,10 @@ public class RestoraniProfit extends AppCompatActivity {
     @BindView(R.id.pprofitRV)RecyclerView profitRView;
     PorackiAdapter adapter;
     public Orders poracki;
+    Menu meni;
+    public RestoraniModel restoraniModel;
     public Restorani restoran;
+    public String restonarName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +37,15 @@ public class RestoraniProfit extends AppCompatActivity {
         setContentView(R.layout.activity_restorani_profit);
         ButterKnife.bind(this);
 
+        restoraniModel = RestoranPreferences.getRestoran(this);
+
 
         Intent intent = getIntent();
         poracki = (Orders) intent.getSerializableExtra("orders");
+        meni = (Menu) intent.getSerializableExtra("meni");
+
+
+
 
 
         adapter = new PorackiAdapter(this);

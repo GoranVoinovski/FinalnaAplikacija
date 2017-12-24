@@ -21,7 +21,8 @@ import butterknife.OnClick;
 public class Checkout extends AppCompatActivity {
     Orders order;
     public Orders orders;
-    String restoran = "";
+    Menu meni;
+    Restorani restoran;
     int pozicija;
 
     Menu menu;
@@ -38,7 +39,8 @@ public class Checkout extends AppCompatActivity {
         if (intent.hasExtra("Order")){
            order = (Orders) intent.getSerializableExtra("Order");
            orders = (Orders) intent.getSerializableExtra("orders");
-           restoran =  intent.getStringExtra("restoran");
+           restoran = (Restorani) intent.getSerializableExtra("restoran");
+           meni =  (Menu) intent.getSerializableExtra("meni");
            pozicija = intent.getIntExtra("pozzicijaRestoran",0);
         }
 
@@ -58,6 +60,7 @@ public class Checkout extends AppCompatActivity {
         Intent intent = new Intent(Checkout.this,RestoraniProfit.class);
         intent.putExtra("orders",orders);
         intent.putExtra("restoran",restoran);
+        intent.putExtra("meni",meni);
         startActivity(intent);
 
     }
