@@ -9,10 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
+import com.mkdingo.goran.finalnaaplikacija.models.Menu;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -91,7 +90,6 @@ public class EditAddFood extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == 2222){
             pickedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
             slika = pickedImage.toString();
             Picasso.with(this).load(pickedImage).centerInside().fit().into(slikahrana);
 

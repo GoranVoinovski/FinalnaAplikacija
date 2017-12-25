@@ -1,14 +1,12 @@
-package com.mkdingo.goran.finalnaaplikacija.Adapter;
+package com.mkdingo.goran.finalnaaplikacija.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.mkdingo.goran.finalnaaplikacija.Fragmenti.FragmentMeni;
-import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
-import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
+import com.mkdingo.goran.finalnaaplikacija.fragmenti.FragmentMeni;
+import com.mkdingo.goran.finalnaaplikacija.models.Menu;
 
 import java.util.ArrayList;
 
@@ -20,14 +18,7 @@ public class SlikiAdapter extends FragmentPagerAdapter{
 
     ArrayList<Menu> menu = new ArrayList<>();
 
-    public void addSliki(ArrayList<Menu> meni){
-
-       menu = meni;
-
-
-    }
-
-
+    public void addSliki(ArrayList<Menu> meni){menu = meni;}
 
     public SlikiAdapter(FragmentManager fm) {
         super(fm);
@@ -50,5 +41,4 @@ public class SlikiAdapter extends FragmentPagerAdapter{
     public int getCount() {
         return menu.size();
     }
-
 }

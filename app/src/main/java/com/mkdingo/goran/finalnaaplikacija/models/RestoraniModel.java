@@ -1,4 +1,4 @@
-package com.mkdingo.goran.finalnaaplikacija.Models;
+package com.mkdingo.goran.finalnaaplikacija.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,5 +11,4 @@ public class RestoraniModel implements Serializable {
 
     public ArrayList<Restorani>restaurants;
     public ArrayList<Menu>menu;
-    public ArrayList<Menu>poracki;
 }

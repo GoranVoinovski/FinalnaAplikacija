@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
-import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
+import com.mkdingo.goran.finalnaaplikacija.manager.RestoranPreferences;
+import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -29,10 +29,12 @@ public class EditRestoran extends AppCompatActivity {
     @BindView(R.id.rating)RatingBar edtrating;
     @BindView(R.id.saverestaurant)Button save;
     Restorani restoran;
+    int pozicija = 0;
     RestoraniModel restorani;
     Uri pickedImage;
     String slika = "";
     String rejting;
+    String web = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +43,19 @@ public class EditRestoran extends AppCompatActivity {
         restorani = RestoranPreferences.getRestoran(this);
 
         Intent intent = getIntent();
-        restoran = (Restorani) intent.getSerializableExtra("restaurant");
+        pozicija = intent.getIntExtra("pozicija",0);
+
+        restoran = restorani.restaurants.get(pozicija);
         Picasso.with(this).load(restoran.getLogo()).centerInside().fit().into(edtlogo);
         slika = restoran.getLogo().toString();
+
         edtcity.setText(restoran.getCity());
         edtname.setText(restoran.getName());
         float rejtng = Float.parseFloat(restoran.getRating());
         edtrating.setRating(rejtng);
         rejting = String.valueOf(rejtng);
+        String web = restoran.getWeb();
+        if (web.isEmpty()){web = "https://www.google.com";}
 
 
         edtrating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -67,7 +74,7 @@ public class EditRestoran extends AppCompatActivity {
         if (slika.isEmpty()){
             slika = "https://i.pinimg.com/736x/b5/5a/e8/b55ae88f3043f90addb5ef028e644325--restaurant-logo.jpg";
         }else {}
-        restoran = new Restorani(slika,edtcity.getText().toString(),edtname.getText().toString(),rejting,restoran.menu);
+        restoran = new Restorani(slika,edtcity.getText().toString(),edtname.getText().toString(),rejting,restoran.menu,web);
         restorani.restaurants.add(restoran);
         Intent intent = new Intent();
         intent.putExtra("Restoran",restoran);
@@ -89,9 +96,7 @@ public class EditRestoran extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == 1111){
-
             pickedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
             slika = pickedImage.toString();
             Picasso.with(this).load(pickedImage).centerInside().fit().into(edtlogo);
 

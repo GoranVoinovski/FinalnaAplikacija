@@ -7,10 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.mkdingo.goran.finalnaaplikacija.Adapter.CheckoutAdapter;
-import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
-import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
-import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
+import com.mkdingo.goran.finalnaaplikacija.adapter.CheckoutAdapter;
+import com.mkdingo.goran.finalnaaplikacija.models.Menu;
+import com.mkdingo.goran.finalnaaplikacija.models.Orders;
+import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
 
 import java.util.ArrayList;
 
@@ -19,16 +19,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Checkout extends AppCompatActivity {
-    Orders order;
-    public Orders orders;
-    Menu meni;
-    Restorani restoran;
-    int pozicija;
+ @BindView(R.id.rvorders)RecyclerView orersRV;
+ @BindView(R.id.overall)TextView smetka;
+      CheckoutAdapter checkoutAdapter;
+      Orders order;
+      Orders orders;
+      Menu meni;
 
-    Menu menu;
-    @BindView(R.id.rvorders)RecyclerView orersRV;
-    @BindView(R.id.overall)TextView smetka;
-    CheckoutAdapter checkoutAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +36,7 @@ public class Checkout extends AppCompatActivity {
         if (intent.hasExtra("Order")){
            order = (Orders) intent.getSerializableExtra("Order");
            orders = (Orders) intent.getSerializableExtra("orders");
-           restoran = (Restorani) intent.getSerializableExtra("restoran");
            meni =  (Menu) intent.getSerializableExtra("meni");
-           pozicija = intent.getIntExtra("pozzicijaRestoran",0);
         }
 
         smetka.setText(order.getUsername() + " your total receipt is: "+ Smetka(order.getNaracki()));
@@ -54,12 +49,10 @@ public class Checkout extends AppCompatActivity {
 
     }
 
-
     @OnClick(R.id.plati)
     public void Plati (){
         Intent intent = new Intent(Checkout.this,RestoraniProfit.class);
         intent.putExtra("orders",orders);
-        intent.putExtra("restoran",restoran);
         intent.putExtra("meni",meni);
         startActivity(intent);
 
@@ -72,11 +65,6 @@ public class Checkout extends AppCompatActivity {
 
             int cena = Integer.parseInt(menu.getPrice());
             smetka = smetka + cena;
-
         }
-
-        return smetka;
-    }
-
-
+        return smetka;}
 }

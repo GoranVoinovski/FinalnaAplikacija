@@ -1,4 +1,4 @@
-package com.mkdingo.goran.finalnaaplikacija.Adapter;
+package com.mkdingo.goran.finalnaaplikacija.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,13 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mkdingo.goran.finalnaaplikacija.Checkout;
-import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
-import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
-import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
+
+import com.mkdingo.goran.finalnaaplikacija.manager.RestoranPreferences;
+import com.mkdingo.goran.finalnaaplikacija.models.Menu;
+import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
 import com.mkdingo.goran.finalnaaplikacija.R;
-import com.mkdingo.goran.finalnaaplikacija.RestoranAktiviti;
 import com.mkdingo.goran.finalnaaplikacija.RestoraniProfit;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
 
 import java.util.ArrayList;
 
@@ -27,11 +27,10 @@ import butterknife.ButterKnife;
 public class PorackiAdapter extends RecyclerView.Adapter<PorackiAdapter.ViewHolder> {
 
    ArrayList<Menu>prices = new ArrayList<>();
-    Context context;
-    public void setItems(ArrayList<Menu>ceni){
+   RestoraniModel restoraniModel;
+   Context context;
 
-        prices = ceni;
-    }
+   public void setItems(ArrayList<Menu>ceni){prices = ceni;}
 
     public PorackiAdapter(Context context) {
         this.context = context;
@@ -45,27 +44,22 @@ public class PorackiAdapter extends RecyclerView.Adapter<PorackiAdapter.ViewHold
 
         ViewHolder holder = new ViewHolder(view);
 
-
         return holder;
     }
 
     @Override
     public void onBindViewHolder(PorackiAdapter.ViewHolder holder, int position) {
         Menu menu = prices.get(position);
-
+        restoraniModel = RestoranPreferences.getRestoran(context);
         holder.article.setText(menu.getFoodname());
         holder.articleprice.setText(menu.getPrice());
         ((RestoraniProfit)context).restoranIme.setText("Total orders balance: " + Smetka(prices));
-        for (Restorani restorani:((RestoraniProfit)context).restoraniModel.restaurants){
+        for (Restorani restorani:restoraniModel.restaurants){
             for (Menu meni:restorani.menu){
                 if (menu.getFoodname().equals(meni.getFoodname()))
                     holder.user.setText(restorani.getName());
             }
-
         }
-
-
-
     }
 
     @Override
@@ -88,11 +82,9 @@ public class PorackiAdapter extends RecyclerView.Adapter<PorackiAdapter.ViewHold
         int smetka = 0;
         for (Menu menu:meni) {
 
-            int cena = Integer.parseInt(menu.getPrice());
+        int cena = Integer.parseInt(menu.getPrice());
             smetka = smetka + cena;
-
         }
-
         return smetka;
     }
 }

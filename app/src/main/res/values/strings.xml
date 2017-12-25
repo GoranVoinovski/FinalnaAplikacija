@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FinalnaAplikacija</string>
+    <string name="location">Location: <u>location</u> </string>
 </resources>

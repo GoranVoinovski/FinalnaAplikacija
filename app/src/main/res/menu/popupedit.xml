@@ -7,4 +7,8 @@
     <item
         android:id="@+id/two"
         android:title="Edit restaurant info"/>
+
+    <item
+        android:id="@+id/three"
+        android:title="Open in browser"/>
 </menu>

@@ -1,4 +1,4 @@
-package com.mkdingo.goran.finalnaaplikacija.Fragmenti;
+package com.mkdingo.goran.finalnaaplikacija.fragmenti;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 import com.mkdingo.goran.finalnaaplikacija.AktivitiFragmenti;
 import com.mkdingo.goran.finalnaaplikacija.EditAddFood;
-import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
-import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
+import com.mkdingo.goran.finalnaaplikacija.models.Menu;
+import com.mkdingo.goran.finalnaaplikacija.manager.RestoranPreferences;
+import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
 import com.mkdingo.goran.finalnaaplikacija.R;
 import com.squareup.picasso.Picasso;
 
@@ -47,7 +47,6 @@ public class FragmentMeni extends Fragment {
     boolean veganskahrana;
     String ime;
     String cena;
-    boolean vegan;
     String slika;
 
 
@@ -58,12 +57,11 @@ public class FragmentMeni extends Fragment {
         mUnbind = ButterKnife.bind(this, view);
         ime = franame.getText().toString();
         cena = fracena.getText().toString();
-
         restorani = RestoranPreferences.getRestoran(getActivity());
+
         Intent pozicijarestoran = getActivity().getIntent();
         restoranodbran = (Restorani) pozicijarestoran.getSerializableExtra("Restoran");
         pos = pozicijarestoran.getIntExtra("Position", 0);
-
 
         link =  getArguments().getString("link");
         pozicija = getArguments().getInt("pozicija");
@@ -80,18 +78,15 @@ public class FragmentMeni extends Fragment {
         if (veganskahrana){veganska.setVisibility(View.VISIBLE);}else {veganska.setVisibility(View.INVISIBLE);}
 
         return view;
-
-
     }
 
     @OnClick(R.id.editfood)
     public void Edit(){
-        vegan = veganskahrana;
         slika = link;
         meni.setPrice(cena);
         meni.setFoodname(ime);
         meni.setLink(slika);
-        meni.setIsveg(vegan);
+        meni.setIsveg(veganskahrana);
         Intent intent = new Intent(getActivity(), EditAddFood.class);
         intent.putExtra("Meni",meni);
         startActivityForResult(intent,2000);
@@ -100,10 +95,7 @@ public class FragmentMeni extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mUnbind.unbind();
-    }
+    public void onDestroy() {super.onDestroy();mUnbind.unbind();}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -122,11 +114,7 @@ public class FragmentMeni extends Fragment {
                 restorani.restaurants.add(pos, restoranodbran);
                 RestoranPreferences.addRestoran(restorani,getActivity());
                 ((AktivitiFragmenti)getActivity()).adapter.notifyDataSetChanged();
-
-
             }
-
-
         }
     }
 }

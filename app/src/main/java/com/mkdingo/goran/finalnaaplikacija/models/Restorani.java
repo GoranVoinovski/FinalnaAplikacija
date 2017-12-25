@@ -1,4 +1,4 @@
-package com.mkdingo.goran.finalnaaplikacija.Models;
+package com.mkdingo.goran.finalnaaplikacija.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,12 +13,14 @@ public class Restorani implements Serializable{
     String name;
     String rating;
     public ArrayList<Menu> menu;
-    public Restorani(String logo, String city, String name, String rating, ArrayList<Menu> menu) {
+    String web;
+    public Restorani(String logo, String city, String name, String rating, ArrayList<Menu> menu,String web) {
         this.logo = logo;
         this.city = city;
         this.name = name;
         this.rating = rating;
         this.menu = menu;
+        this.web = web;
     }
 
     public String getLogo() {
@@ -59,5 +61,13 @@ public class Restorani implements Serializable{
 
     public void setMenu(ArrayList<Menu> menu) {
         this.menu = menu;
+    }
+
+    public String getWeb() {
+        return web;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
     }
 }

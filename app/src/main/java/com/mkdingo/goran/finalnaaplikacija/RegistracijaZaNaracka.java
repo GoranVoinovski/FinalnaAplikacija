@@ -1,16 +1,13 @@
 package com.mkdingo.goran.finalnaaplikacija;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
-import com.mkdingo.goran.finalnaaplikacija.Models.Menu;
-import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
+import com.mkdingo.goran.finalnaaplikacija.models.Menu;
+import com.mkdingo.goran.finalnaaplikacija.models.Orders;
 
 import java.util.ArrayList;
 

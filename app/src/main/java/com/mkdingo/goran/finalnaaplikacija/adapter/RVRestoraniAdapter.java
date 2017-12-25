@@ -1,4 +1,4 @@
-package com.mkdingo.goran.finalnaaplikacija.Adapter;
+package com.mkdingo.goran.finalnaaplikacija.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniOnClickListener;
+import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniOnClickListener;
 import com.mkdingo.goran.finalnaaplikacija.R;
 import com.squareup.picasso.Picasso;
 
@@ -25,33 +25,26 @@ import butterknife.ButterKnife;
  */
 
 public class RVRestoraniAdapter extends RecyclerView.Adapter<RVRestoraniAdapter.ViewHolder> {
-
     RestoraniModel model = new RestoraniModel();
     Context context;
     RestoraniOnClickListener restoraniOnClickListener;
 
-    public void setItems(ArrayList<Restorani>restaurants){
-
-        model.restaurants = restaurants;
-    }
+    public void setItems(ArrayList<Restorani>restaurants){model.restaurants = restaurants;}
 
     public RVRestoraniAdapter(Context context, RestoraniOnClickListener _restoraniOnClickListener) {
         this.context = context;
         this.restoraniOnClickListener = _restoraniOnClickListener;
-
     }
 
     @Override
     public RVRestoraniAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+           Context context = parent.getContext();
+           LayoutInflater inflater = LayoutInflater.from(context);
+           View view = inflater.inflate(R.layout.restoran, parent, false);
 
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.restoran, parent, false);
+           ViewHolder holder = new ViewHolder(view);
 
-        ViewHolder holder = new ViewHolder(view);
-
-
-        return holder;
+           return holder;
     }
 
     @Override
@@ -64,7 +57,6 @@ public class RVRestoraniAdapter extends RecyclerView.Adapter<RVRestoraniAdapter.
             @Override
             public void onClick(View v) {
                 restoraniOnClickListener.onRestoranClick(restoran,position);
-
             }
         });
 
@@ -76,9 +68,6 @@ public class RVRestoraniAdapter extends RecyclerView.Adapter<RVRestoraniAdapter.
                 return true;
             }
         });
-
-
-
     }
 
     @Override

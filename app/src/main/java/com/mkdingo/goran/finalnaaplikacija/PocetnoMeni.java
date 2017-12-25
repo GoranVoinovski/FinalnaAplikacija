@@ -12,12 +12,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.mkdingo.goran.finalnaaplikacija.Adapter.RVRestoraniAdapter;
-import com.mkdingo.goran.finalnaaplikacija.Models.Orders;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoranPreferences;
-import com.mkdingo.goran.finalnaaplikacija.Models.Restorani;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniModel;
-import com.mkdingo.goran.finalnaaplikacija.Models.RestoraniOnClickListener;
+import com.mkdingo.goran.finalnaaplikacija.adapter.RVRestoraniAdapter;
+import com.mkdingo.goran.finalnaaplikacija.manager.OrderPreferences;
+import com.mkdingo.goran.finalnaaplikacija.models.Orders;
+import com.mkdingo.goran.finalnaaplikacija.manager.RestoranPreferences;
+import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniOnClickListener;
 
 import java.util.ArrayList;
 
@@ -26,34 +27,27 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PocetnoMeni extends AppCompatActivity {
-    @BindView(R.id.addbtn)
-    Button addBtn;
-    @BindView(R.id.addorder)
-    Button poracka;
+    @BindView(R.id.addbtn) Button addBtn;
+    @BindView(R.id.addorder) Button poracka;
     @BindView(R.id.rView)RecyclerView moeRView;
     SharedPreferences preferences;
     RestoraniModel model = new RestoraniModel();
     RVRestoraniAdapter adapter;
     Orders order;
     String sign = "";
-    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pocetnomeni);
         ButterKnife.bind(this);
-        int number = 0;
-        preferences = getSharedPreferences("MyOrders",MODE_PRIVATE);
 
-        if (preferences.contains("Order")){
-        sign = "Order";
-        gson = new Gson();
-        Orders ordersnimen = gson.fromJson(preferences.getString("Order", ""), Orders.class);
+        Orders ordersnimen = OrderPreferences.getOrders(this);
+
+        if (!ordersnimen.getUsername().isEmpty()){
         order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki(),ordersnimen.restorants);
         poracka.setText(order.getUsername() + "\nSign Out");
-        }else {
-            poracka.setText("Sign in");
+        }else {poracka.setText("Sign in");
         }
 
         model.restaurants = new ArrayList<>();
@@ -63,18 +57,16 @@ public class PocetnoMeni extends AppCompatActivity {
             onRestoranClick(Restorani restoran, int position) {
                 if (order != null){
                 Intent intent = new Intent(PocetnoMeni.this, RestoranAktiviti.class);
-                intent.putExtra("Restoran", restoran);
                 intent.putExtra("pozicija", position);
                 intent.putExtra("order", order);
-                startActivityForResult(intent, 1000);}else {
-                    Toast.makeText(PocetnoMeni.this, "Please sign in", Toast.LENGTH_SHORT).show();
+                startActivityForResult(intent, 1000);}
+                else {
+                Toast.makeText(PocetnoMeni.this, "Please sign in", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void onRestoranLongClick(Restorani restoran, final int position) {
-
                 final AlertDialog.Builder myBuilder = new AlertDialog.Builder(PocetnoMeni.this);
                 myBuilder.setTitle("Remove restaurant");
                 myBuilder.setMessage("Are you sure you want this restaurant to be removed?");
@@ -127,17 +119,16 @@ public class PocetnoMeni extends AppCompatActivity {
         }else if (resultCode == RESULT_OK && requestCode == 1500){
             Orders ordersnimen = (Orders) data.getSerializableExtra("OrderNum");
             order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki(),ordersnimen.restorants);
-            gson = new Gson();
-            String mapString = gson.toJson(order);
-            preferences.edit().putString("Order", mapString).apply();
-            recreate();
+            OrderPreferences.addOrders(order,this);
         }
     }
 
     @OnClick(R.id.addorder)
     public void Naracka(){
-     if (sign.equals("Order")){
 
+     if (sign.equals("Order")){
+         SharedPreferences getPreferences = getSharedPreferences("ListaPoracki",MODE_PRIVATE);
+         getPreferences.edit().clear().apply();
          preferences.edit().remove("Order").apply();
          recreate();
 

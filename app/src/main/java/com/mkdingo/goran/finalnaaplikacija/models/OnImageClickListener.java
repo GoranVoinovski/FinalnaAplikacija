@@ -1,4 +1,4 @@
-package com.mkdingo.goran.finalnaaplikacija.Models;
+package com.mkdingo.goran.finalnaaplikacija.models;
 
 /**
  * Created by goran on 19.12.17.

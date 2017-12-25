@@ -1,10 +1,11 @@
-package com.mkdingo.goran.finalnaaplikacija.Models;
+package com.mkdingo.goran.finalnaaplikacija.manager;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
 
 /**
  * Created by goran on 18.12.17.
@@ -30,10 +31,6 @@ public class RestoranPreferences {
     return new Gson().fromJson(getPreferences(c).getString("Restorani", restaurants), RestoraniModel.class);
     }
 
-    public static Menu getMenu(Context c){
-
-        return new Gson().fromJson(getPreferences(c).getString("Restorani", restaurants), Menu.class);
-    }
 
 
 
@@ -41,6 +38,7 @@ public class RestoranPreferences {
             "  {\n" +
             "    \"logo\": \"https://en.opensuse.org/images/4/49/Amarok-logo-small.png\",\n" +
             "    \"city\": \"Skopje\",\n" +
+            "    \"web\": \"https://en.opensuse.org\",\n" +
             "    \"name\": \"Vijayawada\",\n" +
             "    \"rating\": \"2.5\",\n" +
             "    \"menu\": [\n" +
@@ -73,6 +71,7 @@ public class RestoranPreferences {
             "  {\n" +
             "    \"logo\": \"http://skopskimerak.mk/mk/img/cali-logo.png\",\n" +
             "    \"city\": \"Skopje\",\n" +
+            "    \"web\": \"http://skopskimerak.mk\",\n" +
             "    \"name\": \"Skopski Merak\",\n" +
             "    \"rating\": \"3.5\",\n" +
             "    \"menu\": [\n" +
@@ -111,6 +110,7 @@ public class RestoranPreferences {
             "{\n" +
             "    \"logo\": \"http://bravos.mk/img/bc-logos.png\",\n" +
             "    \"city\": \"Skopje\",\n" +
+            "    \"web\": \"http://bravos.mk\",\n" +
             "    \"name\": \"Бравос\",\n" +
             "    \"rating\": \"4.5\",\n" +
             "    \"menu\": [\n" +
@@ -155,6 +155,7 @@ public class RestoranPreferences {
             "{\n" +
             "    \"logo\": \"http://bravos.mk/img/bc-logos.png\",\n" +
             "    \"city\": \"Skopje\",\n" +
+            "    \"web\": \"http://www.kineskirestoran.com.mk\",\n" +
             "    \"name\": \"Sвезден Океан\",\n" +
             "    \"rating\": \"4.1\",\n" +
             "    \"menu\": [\n" +
