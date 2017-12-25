@@ -22,7 +22,6 @@ public class RestoraniProfit extends AppCompatActivity {
     @BindView(R.id.pprofitRV)RecyclerView profitRView;
     PorackiAdapter adapter;
     Orders poracki;
-    Menu meni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +29,8 @@ public class RestoraniProfit extends AppCompatActivity {
         setContentView(R.layout.activity_restorani_profit);
         ButterKnife.bind(this);
 
-
         Intent intent = getIntent();
         poracki = (Orders) intent.getSerializableExtra("orders");
-        meni = (Menu) intent.getSerializableExtra("meni");
 
         adapter = new PorackiAdapter(this);
         adapter.setItems(poracki.naracki);

@@ -30,4 +30,10 @@ public class OrderPreferences {
         return new Gson().fromJson(getPreferences(c).getString("Order", ""), Orders.class);
     }
 
+    public static void removeOrders(Context c){
+
+        getPreferences(c).edit().remove("Order").apply();
+
+    }
+
 }

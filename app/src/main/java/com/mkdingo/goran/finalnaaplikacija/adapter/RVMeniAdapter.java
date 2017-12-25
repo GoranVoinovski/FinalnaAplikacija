@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mkdingo.goran.finalnaaplikacija.models.Menu;
-import com.mkdingo.goran.finalnaaplikacija.models.OnImageClickListener;
+import com.mkdingo.goran.finalnaaplikacija.Listeners.OnImageClickListener;
 import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
 import com.mkdingo.goran.finalnaaplikacija.R;
 import com.squareup.picasso.Picasso;

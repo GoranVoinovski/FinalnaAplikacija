@@ -1,4 +1,6 @@
-package com.mkdingo.goran.finalnaaplikacija.models;
+package com.mkdingo.goran.finalnaaplikacija.Listeners;
+
+import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
 
 /**
  * Created by goran on 18.12.17.

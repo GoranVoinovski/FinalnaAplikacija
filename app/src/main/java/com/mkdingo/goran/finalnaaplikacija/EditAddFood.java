@@ -46,13 +46,9 @@ public class EditAddFood extends AppCompatActivity {
          imehrana.setText(meni.getFoodname());
          cenahrana.setText(meni.getPrice());
          veganskaE = meni.isIsveg();
-         veganska.setChecked(false);
-         neveganska.setChecked(false);
-         if (veganskaE){
-             veganska.setChecked(true);
+         veganska.setChecked(veganskaE);
+         neveganska.setChecked(!veganskaE);
 
-         }else{
-             neveganska.setChecked(true);}
         }
     }
 
@@ -60,12 +56,11 @@ public class EditAddFood extends AppCompatActivity {
     @OnClick(R.id.btnaddmenu)
     public void Add(){
            if (imehrana.length()>0 && cenahrana.length()>0){
-               boolean isVegan = true;
-               if (veganska.isChecked()) {
+               boolean isVegan;
+               if (veganska.isChecked()){
                    isVegan = true;
-               } else {
-                   isVegan = false;
-               }
+               }else {isVegan = false;}
+
                String ime = imehrana.getText().toString();
                String cena = cenahrana.getText().toString();
                Menu menu = new Menu(slika, cena, ime, isVegan);

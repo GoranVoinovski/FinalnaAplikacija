@@ -29,4 +29,10 @@ public class PorackiPreferences {
 
             return new Gson().fromJson(getPreferences(c).getString("Poracka", ""), Orders.class);
         }
+
+    public static void removePoracka(Context c){
+
+        getPreferences(c).edit().remove("Poracka").apply();
+
+    }
 }

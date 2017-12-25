@@ -1,4 +1,6 @@
-package com.mkdingo.goran.finalnaaplikacija.models;
+package com.mkdingo.goran.finalnaaplikacija.Listeners;
+
+import com.mkdingo.goran.finalnaaplikacija.models.Menu;
 
 /**
  * Created by goran on 19.12.17.

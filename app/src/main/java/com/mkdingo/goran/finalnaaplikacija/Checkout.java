@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.mkdingo.goran.finalnaaplikacija.adapter.CheckoutAdapter;
+import com.mkdingo.goran.finalnaaplikacija.manager.RestoranPreferences;
 import com.mkdingo.goran.finalnaaplikacija.models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.models.Orders;
 import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
+import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
 
 import java.util.ArrayList;
 
@@ -22,9 +24,10 @@ public class Checkout extends AppCompatActivity {
  @BindView(R.id.rvorders)RecyclerView orersRV;
  @BindView(R.id.overall)TextView smetka;
       CheckoutAdapter checkoutAdapter;
+      RestoraniModel restoraniModel;
       Orders order;
       Orders orders;
-      Menu meni;
+      int pozicija;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +35,11 @@ public class Checkout extends AppCompatActivity {
         setContentView(R.layout.checkout);
         ButterKnife.bind(this);
 
+
         Intent intent = getIntent();
         if (intent.hasExtra("Order")){
            order = (Orders) intent.getSerializableExtra("Order");
            orders = (Orders) intent.getSerializableExtra("orders");
-           meni =  (Menu) intent.getSerializableExtra("meni");
         }
 
         smetka.setText(order.getUsername() + " your total receipt is: "+ Smetka(order.getNaracki()));
@@ -53,7 +56,6 @@ public class Checkout extends AppCompatActivity {
     public void Plati (){
         Intent intent = new Intent(Checkout.this,RestoraniProfit.class);
         intent.putExtra("orders",orders);
-        intent.putExtra("meni",meni);
         startActivity(intent);
 
     }

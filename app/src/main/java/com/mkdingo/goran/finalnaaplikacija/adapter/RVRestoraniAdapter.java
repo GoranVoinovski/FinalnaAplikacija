@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
 import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
-import com.mkdingo.goran.finalnaaplikacija.models.RestoraniOnClickListener;
+import com.mkdingo.goran.finalnaaplikacija.Listeners.RestoraniOnClickListener;
 import com.mkdingo.goran.finalnaaplikacija.R;
 import com.squareup.picasso.Picasso;
 

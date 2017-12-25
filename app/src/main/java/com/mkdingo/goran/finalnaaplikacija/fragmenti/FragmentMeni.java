@@ -60,9 +60,10 @@ public class FragmentMeni extends Fragment {
         restorani = RestoranPreferences.getRestoran(getActivity());
 
         Intent pozicijarestoran = getActivity().getIntent();
-        restoranodbran = (Restorani) pozicijarestoran.getSerializableExtra("Restoran");
         pos = pozicijarestoran.getIntExtra("Position", 0);
 
+
+        restoranodbran = restorani.restaurants.get(pos);
         link =  getArguments().getString("link");
         pozicija = getArguments().getInt("pozicija");
         ime = getArguments().getString("foodname");

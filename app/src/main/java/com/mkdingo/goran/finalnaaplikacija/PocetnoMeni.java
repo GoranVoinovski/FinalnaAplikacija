@@ -11,14 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.mkdingo.goran.finalnaaplikacija.adapter.RVRestoraniAdapter;
 import com.mkdingo.goran.finalnaaplikacija.manager.OrderPreferences;
+import com.mkdingo.goran.finalnaaplikacija.manager.PorackiPreferences;
 import com.mkdingo.goran.finalnaaplikacija.models.Orders;
 import com.mkdingo.goran.finalnaaplikacija.manager.RestoranPreferences;
 import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
 import com.mkdingo.goran.finalnaaplikacija.models.RestoraniModel;
-import com.mkdingo.goran.finalnaaplikacija.models.RestoraniOnClickListener;
+import com.mkdingo.goran.finalnaaplikacija.Listeners.RestoraniOnClickListener;
 
 import java.util.ArrayList;
 
@@ -44,9 +44,10 @@ public class PocetnoMeni extends AppCompatActivity {
 
         Orders ordersnimen = OrderPreferences.getOrders(this);
 
-        if (!ordersnimen.getUsername().isEmpty()){
+        if (ordersnimen!=null){
         order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki(),ordersnimen.restorants);
         poracka.setText(order.getUsername() + "\nSign Out");
+        sign = "Order";
         }else {poracka.setText("Sign in");
         }
 
@@ -85,7 +86,6 @@ public class PocetnoMeni extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
-
                 myBuilder.create().show();
             }
         });
@@ -96,16 +96,11 @@ public class PocetnoMeni extends AppCompatActivity {
         moeRView.setAdapter(adapter);
     }
 
-    ArrayList<Restorani> generateList() {
-
-        model = RestoranPreferences.getRestoran(this);
-
-        return model.restaurants;
-    }
+        ArrayList<Restorani> generateList() {model = RestoranPreferences.getRestoran(this);
+            return model.restaurants;}
 
     @OnClick(R.id.addbtn)
     public void AddRestoran() {
-
         Intent intent = new Intent(PocetnoMeni.this, AddRestoran.class);
         startActivityForResult(intent, 1000);
     }
@@ -113,29 +108,25 @@ public class PocetnoMeni extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == 1000) {
-
             adapter.setItems(generateList());
             adapter.notifyDataSetChanged();
         }else if (resultCode == RESULT_OK && requestCode == 1500){
             Orders ordersnimen = (Orders) data.getSerializableExtra("OrderNum");
             order = new Orders(ordersnimen.getTelnumber(),ordersnimen.getUsername(),ordersnimen.getNaracki(),ordersnimen.restorants);
             OrderPreferences.addOrders(order,this);
+            recreate();
         }
     }
 
     @OnClick(R.id.addorder)
     public void Naracka(){
-
-     if (sign.equals("Order")){
-         SharedPreferences getPreferences = getSharedPreferences("ListaPoracki",MODE_PRIVATE);
-         getPreferences.edit().clear().apply();
-         preferences.edit().remove("Order").apply();
+      if (sign.equals("Order")){
+         OrderPreferences.removeOrders(this);
+         PorackiPreferences.removePoracka(this);
          recreate();
-
      }else {
          Intent intent = new Intent(PocetnoMeni.this, RegistracijaZaNaracka.class);
          startActivityForResult(intent, 1500);
      }
-
     }
 }

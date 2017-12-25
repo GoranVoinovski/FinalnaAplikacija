@@ -1,7 +1,6 @@
 package com.mkdingo.goran.finalnaaplikacija;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -17,11 +16,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.mkdingo.goran.finalnaaplikacija.adapter.RVMeniAdapter;
 import com.mkdingo.goran.finalnaaplikacija.manager.PorackiPreferences;
 import com.mkdingo.goran.finalnaaplikacija.models.Menu;
-import com.mkdingo.goran.finalnaaplikacija.models.OnImageClickListener;
+import com.mkdingo.goran.finalnaaplikacija.Listeners.OnImageClickListener;
 import com.mkdingo.goran.finalnaaplikacija.models.Orders;
 import com.mkdingo.goran.finalnaaplikacija.manager.RestoranPreferences;
 import com.mkdingo.goran.finalnaaplikacija.models.Restorani;
@@ -120,8 +118,6 @@ public class RestoranAktiviti extends AppCompatActivity {
                     Intent intent = new Intent(RestoranAktiviti.this,Checkout.class);
                     intent.putExtra("Order",order);
                     intent.putExtra("orders",orders);
-                    intent.putExtra("pozicija",pozicija);
-                    intent.putExtra("meni",menu);
                     startActivityForResult(intent,1000);
 
 
