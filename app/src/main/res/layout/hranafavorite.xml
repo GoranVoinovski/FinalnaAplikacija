@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/favhranalayout"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
+    android:padding="10dp"
+    android:elevation="10dp"
+    android:background="@drawable/favorites"
+    android:layout_height="wrap_content">
+
+
+       <ImageView
+           android:layout_marginTop="25dp"
+           android:id="@+id/slikahrana"
+           android:layout_centerVertical="true"
+           android:layout_width="100dp"
+           android:layout_height="100dp" />
+
+       <TextView
+           android:id="@+id/nazivhrana"
+           android:layout_marginTop="10dp"
+           android:layout_marginLeft="5dp"
+           android:layout_toRightOf="@id/slikahrana"
+           android:textColor="@color/black"
+           style="@style/Base.TextAppearance.AppCompat.Medium"
+           android:gravity="center_vertical|start"
+           android:layout_gravity="top"
+           android:layout_width="230dp"
+           android:layout_height="50dp" />
+
+       <TextView
+           android:id="@+id/cenahrana"
+           android:layout_marginTop="60dp"
+           android:gravity="start|center_vertical"
+           android:layout_marginLeft="5dp"
+           style="@style/Base.TextAppearance.AppCompat.Medium"
+           android:layout_width="100dp"
+           android:layout_toRightOf="@id/slikahrana"
+           android:textColor="@color/red_500"
+           android:layout_height="50dp" />
+
+       <ImageView
+           android:layout_marginTop="75dp"
+           android:id="@+id/vegan"
+           android:layout_toRightOf="@id/cenahrana"
+           android:layout_alignParentRight="true"
+           android:layout_marginLeft="50dp"
+           android:layout_width="50dp"
+           android:layout_height="50dp" />
+
+</RelativeLayout>

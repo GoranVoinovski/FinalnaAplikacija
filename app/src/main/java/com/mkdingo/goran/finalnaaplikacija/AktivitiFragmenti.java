@@ -30,7 +30,7 @@ public class AktivitiFragmenti extends AppCompatActivity {
         setContentView(R.layout.aktivitifragmenti);
 
         ButterKnife.bind(this);
-
+        adapter = new SlikiAdapter(this.getSupportFragmentManager());
         restorani = RestoranPreferences.getRestoran(this);
         Intent pozicijarestoran = getIntent();
         position = pozicijarestoran.getIntExtra("Position", 0);
@@ -38,7 +38,7 @@ public class AktivitiFragmenti extends AppCompatActivity {
 
         restoranOdbran = restorani.restaurants.get(position);
 
-        adapter = new SlikiAdapter(this.getSupportFragmentManager());
+
 
         adapter.addSliki(restoranOdbran.menu);
         mojPager.setAdapter(adapter);

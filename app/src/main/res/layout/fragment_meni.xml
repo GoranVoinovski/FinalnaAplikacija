@@ -46,4 +46,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/editfood"/>
 
+
+    <Button
+        android:layout_gravity="center_vertical|bottom|right"
+        android:layout_marginRight="5dp"
+        android:textColor="@color/white"
+        android:background="@color/transparent2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/favoritefood"/>
+
 </FrameLayout>

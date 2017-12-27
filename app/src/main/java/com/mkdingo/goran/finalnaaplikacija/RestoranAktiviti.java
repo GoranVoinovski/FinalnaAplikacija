@@ -17,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mkdingo.goran.finalnaaplikacija.adapter.RVMeniAdapter;
+import com.mkdingo.goran.finalnaaplikacija.manager.FavoritePreferences;
 import com.mkdingo.goran.finalnaaplikacija.manager.PorackiPreferences;
+import com.mkdingo.goran.finalnaaplikacija.models.FavoriteFood;
 import com.mkdingo.goran.finalnaaplikacija.models.Menu;
 import com.mkdingo.goran.finalnaaplikacija.Listeners.OnImageClickListener;
 import com.mkdingo.goran.finalnaaplikacija.models.Orders;
@@ -49,6 +51,7 @@ public class RestoranAktiviti extends AppCompatActivity {
     Orders order;
     Orders orders;
     int pozicija = 0;
+    int pozicijaMeni = 0;
     String web = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class RestoranAktiviti extends AppCompatActivity {
         restorani = RestoranPreferences.getRestoran(this);
         cart.setVisibility(View.INVISIBLE);
         cart.setText("Checkout");
+
         Intent intent = getIntent();
         if (intent.hasExtra("pozicija")){
             pozicija = intent.getIntExtra("pozicija",0);
@@ -79,10 +83,12 @@ public class RestoranAktiviti extends AppCompatActivity {
                 orders = new Orders(order.getTelnumber(),order.getUsername(),naracki,restorants);}
 
 
+
                adapter = new RVMeniAdapter(this, new OnImageClickListener() {
                 @Override
                 public void onImageClick(Menu meni, int position) {
                     Intent intent = new Intent(RestoranAktiviti.this, AktivitiFragmenti.class);
+                    pozicijaMeni = position;
                     intent.putExtra("Position", pozicija);
                     intent.putExtra("Position1", position);
                     startActivityForResult(intent,1111);
@@ -118,6 +124,8 @@ public class RestoranAktiviti extends AppCompatActivity {
                     Intent intent = new Intent(RestoranAktiviti.this,Checkout.class);
                     intent.putExtra("Order",order);
                     intent.putExtra("orders",orders);
+                    intent.putExtra("pozicija",pozicija);
+                    intent.putExtra("meni",menu);
                     startActivityForResult(intent,1000);
 
 
